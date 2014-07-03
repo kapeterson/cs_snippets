@@ -1,15 +1,6 @@
 #include <stdio.h>
 
-void doit();
-
-int main(){
-
-	printf("hello there\n");
-	doit();
+int main(int argc, char** arv){
+	int x;
+	printf("Hello world\n");  
 }
-
-void doit(){
-	printf("printing from a method\n");
-}
-
-
