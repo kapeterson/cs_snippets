@@ -1,0 +1,10 @@
+*
+!*.c
+!*.txt
+!*.cpp
+!*.cc
+!*.pl
+!*.rb
+!*.asm
+!*.gitignore
+!*.py
