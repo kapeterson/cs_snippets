@@ -1,6 +1,6 @@
 .text
 la $a0, arry
-li $a1, 12
+li $a1, 6
 jal insertionStart
 j bye
 
@@ -75,4 +75,4 @@ bye:
 
 .data
 
-arry: .word 10, 9, 8, 7, 6, 5, 4, 1, 2, 3, 5
+arry: .word  6, 5, 4, 3, 2, 1
