@@ -8,3 +8,5 @@
 !*.asm
 !*.gitignore
 !*.py
+!*.h
+Makefile
