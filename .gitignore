@@ -9,4 +9,4 @@
 !*.gitignore
 !*.py
 !*.h
-Makefile
+!Makefile
