@@ -85,46 +85,35 @@ void vector_set(vector_t *v, size_t loc, int value) {
  * 	 * allocated?  Remember that unset locations should contain a value of 0.
  * 	 	 */
 
-	printf("setting idex %d with value=%3d current=%5d\n",(int)loc,value,v->data[loc]);
+	//printf("setting idex %d with value=%3d current=%5d\n",(int)loc,value,v->data[loc]);
 	
 
 	int sizeNeeded = (loc+1);
 	int sizeAllocated = v->size;
-	printf("we need %d and have %d\n", sizeNeeded, sizeAllocated);
+	//printf("we need %d and have %d\n", sizeNeeded, sizeAllocated);
+
 
 	if ( sizeNeeded > sizeAllocated) {
-		printf("We need to grow this beeyatch and reallocate for size %d \n", sizeNeeded);
+		printf("We need to grow reallocate for size %d \n", sizeNeeded);
 		
-		vector_t *newv;
-		newv = malloc( 1 * sizeof(vector_t) );
+		v->data = realloc(v->data, sizeNeeded * sizeof(int));
 
-		/* Check our return value to make sure we got memory */
-		if(newv == NULL)
-                	allocation_failed();
-
-		printf("setting size to %d\n",sizeNeeded);
-		newv->size = sizeNeeded;
-		newv->data = malloc( sizeNeeded * sizeof(int));
-		/* Check our return value to make sure we got memory */
-		if(newv->data == NULL)
-                	allocation_failed();
-
-		for ( int i = 0; i < sizeNeeded -1; i++) {
-			
-			newv->data[i] = v->data[i];
+		for(int i = sizeAllocated; i < sizeNeeded; i++){
+			v->data[i] = 0;
 		}
-		//vector_delete(v);
-		
-		vector_delete(v);
-		v = newv;
-		//v->size = sizeNeeded;
-		//v->data = newv->data;
+		v->size = sizeNeeded;
+		v->data[loc] = value;
+		printf("verifying size of new one is %d\n", (int)v->size);
+		printf("verifying value just set is %d\n", v->data[loc]);
+
+
+
 		
 
 
 	} else {
 
-		printf("Cool bro we can set it yo\n");
+		//printf("Cool bro we can set it to %d at loc %d \n", value, (int)loc);
 		v->data[loc] = value;
 	}
 
