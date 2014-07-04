@@ -94,7 +94,7 @@ void vector_set(vector_t *v, size_t loc, int value) {
 
 
 	if ( sizeNeeded > sizeAllocated) {
-		printf("We need to grow reallocate for size %d \n", sizeNeeded);
+
 		
 		v->data = realloc(v->data, sizeNeeded * sizeof(int));
 
@@ -103,12 +103,7 @@ void vector_set(vector_t *v, size_t loc, int value) {
 		}
 		v->size = sizeNeeded;
 		v->data[loc] = value;
-		printf("verifying size of new one is %d\n", (int)v->size);
-		printf("verifying value just set is %d\n", v->data[loc]);
 
-
-
-		
 
 
 	} else {
