@@ -13,7 +13,6 @@ int main(int argc, char** arv){
 	printf("location of b %p\n",b);
 
 
-	free(a);
 	free(b);	
 	
 }
