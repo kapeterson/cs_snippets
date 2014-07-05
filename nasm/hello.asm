@@ -1,3 +1,7 @@
+; compile by th efollowing
+; 1) nasm -f elf64 file.asm
+; 2) ld file.o -o exename
+
 section .data
 	hello:     db 'Hello world!',10    ; 'Hello world!' plus a linefeed character
 	helloLen:  equ $-hello             ; Length of the 'Hello world!' string
