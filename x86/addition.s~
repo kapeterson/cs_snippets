@@ -1,0 +1,23 @@
+
+.section .rodata                       # The rodata section contains the
+                                       #     constants used by the program.
+string: .ascii "Hello, world!\n"       # The string constant contains the
+                                       #     string to be printed.
+length: .quad . - string               # The length constant contains the
+                                       #     length of the string constant.
+.section .text                         # The text section contains the
+                                       #     executable instructions of the
+                                       #     program.
+.globl main                            # Declare the main symbol as global so
+                                       #     that the linker can see it.
+main:                                  # The main symbol is the entry point of
+                                       #     the program.
+mov   $1, %rax                        # move 1 to %rax
+mov   $1, %rdi                         # move 1 to %rdi
+mov   %rsp, %rbx			# move stack pointer to rbx
+mov   %rdi, (%rsp)			# move 1 into first byte of stack pointer
+mov  $0x06, %rdi
+mov  %rdi,0x4(%rsp)
+mov   0x0(%rsp), %rbp
+mov  %rsp, %rcx
+hlt
