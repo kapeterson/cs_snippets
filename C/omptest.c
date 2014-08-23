@@ -1,3 +1,5 @@
+// compile insturction gcc -fopenmp -o omptest omptest.c
+
 #include <stdio.h>
 #include <omp.h>
 
