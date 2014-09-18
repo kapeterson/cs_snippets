@@ -27,5 +27,14 @@ int main(){
 	std::cout << "Hello thar\n";
 	StackObject mystack = StackObject(5);
 	CreateDummyStack();
+	
+	StackObject stack = StackObject(4);
+	StackObject *pstack;
+	pstack = &stack;
+	
+	pstack->push(1);
+	pstack->push(2);
+	pstack->push(1001);
+	std::cout << "Popping " << pstack->pop() << std::endl;
 	return 0;
 }

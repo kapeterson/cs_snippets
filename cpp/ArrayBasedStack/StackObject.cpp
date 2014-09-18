@@ -10,7 +10,7 @@ StackObject::StackObject(int sz){
 }
 
 StackObject::~StackObject(){
-	std::cout << "Destructing Array Based Statck\n";
+//	std::cout << "Destructing Array Based Statck\n";
 	delete stack;
 }
 
