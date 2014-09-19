@@ -8,7 +8,7 @@ int main(){
 	AnimalObject thisAnimal = AnimalObject("monkey");
 	thisAnimal = MonkeyObject();
 	EnemyObject theEnemy = EnemyObject("Hunter");
-	
+ 	AnimalObject nextAnimal("lion");	
 	std::cout << "Animal name is " << thisAnimal.getName() << std::endl;
 	std::cout << "Animal " << thisAnimal.getName() << " has enemy " << theEnemy.getName() << std::endl;
 	return 0;
