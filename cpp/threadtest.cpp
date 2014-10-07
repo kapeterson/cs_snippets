@@ -2,7 +2,7 @@
 #include <thread>
 
 void threadWork(){
-	cout << "hello from thread \n";
+	std::cout << "hello from thread \n";
 }
 
 int main(){
