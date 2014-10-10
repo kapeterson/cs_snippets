@@ -53,5 +53,11 @@ int main(){
 	me = MyClass(113);
 	bool res = (olderDude == me);
 	printf("The two are equal = %d\n", res);
+	
+	MyClass* classp = new MyClass(500);
+
+	printf("class pointer age is %d\n",classp->getAge());
+	printf("the addr of it is %p\n", classp);
+	delete classp;
 	return 0;	
 }
