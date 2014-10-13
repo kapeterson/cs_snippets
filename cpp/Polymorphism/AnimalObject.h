@@ -7,7 +7,7 @@ class AnimalObject {
 	protected:
 		int speed;
 	public:
- 		 void run();	
+ 		virtual void run();	
 		int getSpeed(){
 			return speed;
 		}
