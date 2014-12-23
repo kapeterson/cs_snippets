@@ -3,6 +3,10 @@
 #include <pcap.h>
 #include <string>
 
+/*
+//	Compile with: g++ -L/usr/include/pcap wstest.cpp -lpcap
+*/
+
 using namespace std;
 
 int main(int argc, char* argv[]){
@@ -24,5 +28,7 @@ int main(int argc, char* argv[]){
 		printf("     Packet %d\n", packetCount);
 		packetCount++;
 	}
+
+	printf("\nWe had a total of %d packets\n", packetcount);
 	return 0;
 }

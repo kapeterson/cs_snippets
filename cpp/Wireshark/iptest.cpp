@@ -20,7 +20,6 @@ int main(int argc, char* argv[]){
 
 	struct pcap_pkthdr *header;
 	const u_char *data;
-
 	u_int packetCount = 0;
 
 	while ( int returnValue = pcap_next_ex(pcap, &header, &data ) >= 0 ){
