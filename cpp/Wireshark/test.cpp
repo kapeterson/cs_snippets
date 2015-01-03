@@ -17,6 +17,8 @@ struct sniff_ethernet {
 	u_short ether_type;
 };
 
+
+
 void printUsage(){
 	printf("Usage: test.cpp <filename>\n\n");
 }
@@ -45,11 +47,13 @@ int main(int argc, char *argv[]){
 	int packetcount = 0;
 
 	while ( int returnValue = pcap_next_ex(pcap, &header, &data ) >= 0 ){
-		printf( "packet %d\n", packetcount);
+		//printf( "packet %d\n", packetcount);
 
 		ethernet  = (struct sniff_ethernet*)data;
-	//	ip = (struct sniff_ip*)(data + SIZE_ETHERNET);
-	//	cout << "SRC IP is " <<  ethernet->ether_shost << "\n";
+		char tstring[50];
+		sprintf(tstring, "OK %d\n", 1);
+		printf("Packet %d Ethernet src: %02x:%02x:%02x:%02x\n", packetcount, ethernet->ether_dhost[0],
+			ethernet->ether_dhost[1], ethernet->ether_dhost[2], ethernet->ether_dhost[3]);
 		packetcount++;
 	}
 	return 0;
