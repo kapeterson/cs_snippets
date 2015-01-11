@@ -13,7 +13,10 @@ int main(){
 		return 1;
 	} else if ( pid == 0  ) {
 		printf("We good yall %d\n", (int)pid);
-		execlp("/bin/ls", "ls", NULL);
+
+		printf("Child yo... do do dis");
+		sleep(5);
+		//execlp("/bin/ls", "ls", NULL);
 	} else {
 		
 		printf("Original thread gonna wait\n");
