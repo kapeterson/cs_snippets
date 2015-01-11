@@ -11,5 +11,6 @@ int main(){
 	while ( sizeof(char) == read(fdesc, &key, sizeof(char) )) {
 		printf("%c",key);
 	}
+	close(fdesc);
 	return 0;
 }
