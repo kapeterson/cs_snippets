@@ -41,7 +41,12 @@ int main(int argc, char *argv[])
 		{
 			recvBuff[n] = 0;
 			printf("RECV: %s\n", recvBuff);
-
+			char *word;
+			word = strtok(recvBuff, " ");
+			while ( word != NULL ) {
+				printf("     Word = %s\n", word);
+				word = strtok(NULL, " ");
+			}
 		} 
         close(connfd);
         sleep(1);
