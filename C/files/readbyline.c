@@ -21,5 +21,8 @@ int main(){
 		printf("%s",line);
 	}
 	fclose(fp);
+	if ( line)
+		free(line);
+	
 	return 0;
 }
