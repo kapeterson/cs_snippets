@@ -45,19 +45,19 @@ int main(int argc, char *argv[])
        return 1;
     } 
 
-    while ( (n = read(sockfd, recvBuff, sizeof(recvBuff))) > 0)
-    {
-        recvBuff[n] = 0;
-        if(fputs(recvBuff, stdout) == EOF)
-        {
-            printf("\n Error : Fputs error\n");
-        }
+	printf("sending to server");
+	char *msg  = "Hello server you sloppy bastard\n";
+	//char *msg2  = "Hello this is the second message\n";
+
+	int res = write(sockfd, msg, strlen(msg)); 
+	//res = write(sockfd, msg2, strlen(msg2)); 
+
+	if(n < 0){
+        printf("\n Write error \n");
     } 
 
-    if(n < 0)
-    {
-        printf("\n Read error \n");
-    } 
+
+ 
 
     return 0;
 }
