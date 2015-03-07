@@ -1,7 +1,7 @@
 #include <sys/ipc.h>
 #include <stdio.h>
 #include <sys/shm.h>
-
+#include <string.h>
 
 
 long shimid;
@@ -16,6 +16,9 @@ int main(){
 	printf("Shim id = %lu \n", shimid);
 
 	char *shmpointer = shmat(shimid, NULL, 0);
+		
+
+	strcpy(shmpointer, "ipcbrah");
 
 	if ( shmpointer == (char * )(-1)){
 		printf("there was an issue");
@@ -24,7 +27,10 @@ int main(){
 	
 	
 
-	sleep(10);
+	sleep(5);
+	char rd[50];
+	strcpy(rd,shmpointer);
+	printf("Read valud of %s from ipc\n", rd);
 	shmdt(&shmpointer);
 	shmctl(shimid, IPC_RMID, &shmbuffer);
 	printf("OK brah\n");
