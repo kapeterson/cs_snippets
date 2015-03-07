@@ -7,6 +7,14 @@
 long shimid;
 key_t key = 66607;
 
+
+struct ipcstruct {
+	int value;
+	int size;
+
+};
+
+
 int main(){
 	
 	struct shmid_ds shmbuffer;
@@ -15,10 +23,14 @@ int main(){
 
 	printf("Shim id = %lu \n", shimid);
 
-	char *shmpointer = shmat(shimid, NULL, 0);
-		
+	struct ipcstruct tstruct;
+	tstruct.value = 5;
+	tstruct.size = 666;
 
-	strcpy(shmpointer, "ipcbrah");
+	char *shmpointer = shmat(shimid, NULL, 0);
+	memcpy(shmpointer, &tstruct, sizeof(tstruct));	
+
+	//strcpy(shmpointer, "ipcbrah");
 
 	if ( shmpointer == (char * )(-1)){
 		printf("there was an issue");
@@ -28,9 +40,15 @@ int main(){
 	
 
 	sleep(5);
-	char rd[50];
-	strcpy(rd,shmpointer);
-	printf("Read valud of %s from ipc\n", rd);
+	
+
+	struct ipcstruct newstruct;
+	memcpy(&newstruct, shmpointer, sizeof(struct ipcstruct));
+	printf("The size read from mem is %d\n", newstruct.size);
+
+	//char rd[50];
+	//strcpy(rd,shmpointer);
+	//printf("Read valud of %s from ipc\n", rd);
 	shmdt(&shmpointer);
 	shmctl(shimid, IPC_RMID, &shmbuffer);
 	printf("OK brah\n");
