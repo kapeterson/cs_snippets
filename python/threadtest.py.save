@@ -1,0 +1,21 @@
+#!/usr/bin/python
+import threading
+
+def thread_function():
+	print("In the thread " + int(brah")
+
+
+
+
+print "OK brah"
+thread_function()
+
+
+print "Going to start threads"
+
+t = threading.Thread(target=thread_function)
+t.start()
+
+#id = thread.start_new_thread(thread_function)
+#print "Created thread id " + str(id)
+
