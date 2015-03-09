@@ -16,7 +16,7 @@ struct qmsg {
 
 extern int errno;       // error NO.
 
-int main(){
+int main(int argc, char **argv){
 	int keyval = 777;
 	key_t msgkey;
 
@@ -25,7 +25,15 @@ int main(){
 	int result, len;
 	
 	int qid = msgget(msgkey, IPC_CREAT | 0660);
-
+	printf("QID is %d\n", qid);
+	char message[50] = "defaultmsg";
+	//const char *msg2 = "test message";
+	
+	if ( argc > 1 ) {
+		//msg2 = (argv[1];
+		strcpy(message, argv[1]);
+		printf("Copied %s\n", message);
+	}
 	
 	
 
@@ -40,7 +48,7 @@ int main(){
 	//thismessage.request = 14;
 	thismessage.mtype = 1;
 	thismessage.val = 44;
-	strcpy(thismessage.mtext,"test");
+	strcpy(thismessage.mtext,message);
 	
 	result = msgsnd(qid, &thismessage,  sizeof(struct qmsg) - sizeof(long), 0);
 	if ( result == -1){
@@ -49,6 +57,7 @@ int main(){
 		return 1;
 	}
 	
+	sleep(10);
 	struct qmsg newmsg;
 	int rx = msgrcv(qid, &newmsg, sizeof(struct qmsg) - sizeof(long), 0, 0);
 	printf("The rx text is %s\n", newmsg.mtext);
