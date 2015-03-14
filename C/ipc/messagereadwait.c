@@ -10,6 +10,7 @@ struct qmsg {
 	long mtype;
 	char mtext[50];
 	int val;
+        char cc[2048];
 	
 };
 
@@ -26,7 +27,7 @@ int main(){
 	
 
 	int qid = msgget(msgkey, IPC_CREAT | 0660);
-
+	printf("QID is %d\n", qid);
 
 
 	struct qmsg newmsg;

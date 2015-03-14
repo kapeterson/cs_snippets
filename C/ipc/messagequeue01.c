@@ -10,7 +10,7 @@ struct qmsg {
 	long mtype;
 	char mtext[50];
 	int val;
-	
+	char cc[2048];	
 };
 
 
@@ -50,13 +50,20 @@ int main(int argc, char **argv){
 	thismessage.val = 44;
 	strcpy(thismessage.mtext,message);
 	
-	result = msgsnd(qid, &thismessage,  sizeof(struct qmsg) - sizeof(long), 0);
+	printf("about to send to q\n");
+	result = msgsnd(qid, &thismessage,  sizeof(struct qmsg) - sizeof(long), IPC_NOWAIT );
+	printf("we send yo\n");
 	if ( result == -1){
+
+		printf("Error = %d\n", result);
 		perror("send_message");
+
 		//perror( strerror(errno) );
 		return 1;
+	} else {
+		printf("Error send result is %d\n", result);
 	}
-	
+	printf("WE gonna send\n");
 	sleep(10);
 	struct qmsg newmsg;
 	int rx = msgrcv(qid, &newmsg, sizeof(struct qmsg) - sizeof(long), 0, 0);

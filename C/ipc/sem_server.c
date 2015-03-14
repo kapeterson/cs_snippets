@@ -51,7 +51,6 @@ void *serverThread(void *arg){
 		gettimeofday(&ttime, NULL);		
 		printf("I JUST READ\n");
 		printf("I AM SENDING.....%lu.%lu\n", ttime.tv_sec, ttime.tv_usec);
-		//printf("The value of the sem was %d\n", semval);
 
 		sleep(10);
 

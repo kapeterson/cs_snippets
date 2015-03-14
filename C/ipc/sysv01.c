@@ -33,6 +33,7 @@ int main(){
 	//strcpy(shmpointer, "ipcbrah");
 
 	if ( shmpointer == (char * )(-1)){
+	
 		printf("there was an issue");
 		return 1;
 	}
