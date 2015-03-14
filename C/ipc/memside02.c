@@ -17,11 +17,10 @@ key_t key = 66607;
 struct ipcstruct {
 	int value;
 	int size;
-	int proxySending;
-	int cacheSending;
 	pthread_mutex_t memMutex;
 
 };
+
 
 int main(){
 	printf("side2\n");

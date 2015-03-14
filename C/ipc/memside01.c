@@ -18,8 +18,6 @@ key_t key = 66607;
 struct ipcstruct {
 	int value;
 	int size;
-	int proxySending;
-	int cacheSending;
 	pthread_mutex_t memMutex;
 
 };
@@ -40,6 +38,8 @@ int main(){
 	struct ipcstruct *thisstruct = shmat(shimid, NULL, 0);
 	pthread_mutex_init(&thisstruct->memMutex, &mattr);
 	thisstruct->value = 444;
+	thisstruct->size = 12;
+	
 	
 	pthread_mutex_lock(&(thisstruct->memMutex));
 	while ( 1 ) {
