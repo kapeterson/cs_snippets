@@ -18,42 +18,24 @@ struct ipcstruct {
 	int value;
 	int size;
 	pthread_mutex_t memMutex;
-
+	int last;
 };
 
+int main(int argc, char **argv){
 
-int main(){
-	printf("side2\n");
-	
-	shimid = shmget(key, 1024,  0666);
-	if ( shimid < 0 ) {
-		perror("no_shmid");
-		exit(1);
+	if ( argc < 2 ) {
+		printf("ERROR you need to vit eh mem id\n");
+		return 0;
 	}
-	printf("Shim id = %lu \n", shimid);
+	
+	printf("Arg 1 is %s\n", argv[1]);
+	
+	int memid = atoi(argv[1]);
+	printf("Mem id is %d\n", memid);
 
-
-	struct ipcstruct *shmpointer = (struct ipcstruct * )shmat(shimid, NULL, 0);
-
-	
-	printf("The value of it is %d\n", shmpointer->value);
-	//memcpy(shmpointer, &tstruct, sizeof(tstruct));	
-	
-	
-	int scope;
-	
-	pthread_mutex_lock(&shmpointer->memMutex);
-		
-		//while ( shmpointer->proxySending == 1 ) {
-		//	pthread_cond_wait( &(shmpointer->cvProxyGo), &(shmpointer->memMutex));
-		//}
-		printf("WE send\n");
-
-	pthread_mutex_unlock(&(shmpointer->memMutex));
-	printf("We signal now\n");
-	//shmpointer->cacheSending = 0;
-	
-	//int res = pthread_cond_signal(&(shmpointer->cvProxyGo));
-	//printf("Result of signal is %d\n", res);
+	char *p = shmat(shimid, (void *)0, 0);
+	struct ipcstruct *mystruct = (struct ipcstruct *)p;
+	pthread_mutex_lock(&mystruct->memMutex);
+	printf("We did it\n");
 	return 0;
 }

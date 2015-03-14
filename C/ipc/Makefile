@@ -29,4 +29,4 @@ posix02: posix02.o
 	$(CC) -o $@ $(CFLAGS) $(CURL_CFLAGS) $^ $(LDFLAGS) $(CURL_LIBS)
 	
 clean: 
-	rm -fr *.o sendmsg getmsg sem_client sem_server
+	rm -fr *.o sendmsg getmsg sem_client sem_server memside01 memside02 posix01 posix02

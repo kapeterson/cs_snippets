@@ -14,9 +14,13 @@
 #include <sys/stat.h>
 #include <sys/mman.h>
 
+
+int shmd;
+
 long shimid;
 key_t key = 66607;
-
+int LEN = 1024;
+struct ipcstruct *mystruct;
 
 struct ipcstruct {
 	int value;
@@ -28,13 +32,42 @@ struct ipcstruct {
 	pthread_cond_t  cvCacheGo;	
 };
 
+
+static void _sig_handler(int signo){
+  if (signo == SIGINT || signo == SIGTERM){
+	printf("Interrupted\n");
+	munmap(mystruct, LEN);
+	shm_unlink("555");
+    exit(signo);
+
+  }
+}
+
+
+
 int main(){
+  if (signal(SIGINT, _sig_handler) == SIG_ERR){
+    fprintf(stderr,"Can't catch SIGINT...exiting.\n");
+    exit(EXIT_FAILURE);
+  }
+
+  if (signal(SIGTERM, _sig_handler) == SIG_ERR){
+    fprintf(stderr,"Can't catch SIGTERM...exiting.\n");
+    exit(EXIT_FAILURE);
+  }
+	
+	
 	printf("OK\n");
-	int shmd;
-	shmd = shm_open("test", O_CREAT | O_RDWR, 0666);
+	
+	char memName[15];
+	sprintf(memName, "%d", 555);
+
+	shmd = shm_open(memName, O_CREAT | O_RDWR, 0666);
+	printf("File handle is %d\n", shmd);
+	
 	ftruncate(shmd, sizeof(struct ipcstruct));
 	
-	struct ipcstruct *mystruct = (struct ipcstruct *)mmap(NULL, sizeof(struct ipcstruct), 
+	mystruct = (struct ipcstruct *)mmap(NULL, sizeof(struct ipcstruct), 
 		PROT_READ | PROT_WRITE, MAP_SHARED, shmd, 0);
 		
 	mystruct->value = 23;
@@ -57,16 +90,24 @@ int main(){
 	mystruct->cachesending = 1;
 	mystruct->proxysending = 0;
 	
+	
+	while ( 1 ) {
 	pthread_mutex_lock(&(mystruct->memMutex));
 
+		
+		while( mystruct->cachesending == 1){
+			printf("Waiting....\n");
+			pthread_cond_wait(&(mystruct->cvProxyGo), &(mystruct->memMutex) );
+		}
+		printf("We got the lock doing work....\n");
+		mystruct->proxysending = 1;
+		sleep(5);
+		mystruct->proxysending = 0;
+		mystruct->cachesending = 1;
 	
-	while( mystruct->cachesending == 1){
-		printf("Wait\n");
-		pthread_cond_wait(&(mystruct->cvProxyGo), &(mystruct->memMutex) );
+		pthread_mutex_unlock(&(mystruct->memMutex));
+		pthread_cond_signal(&(mystruct->cvCacheGo));
+
 	}
-	
-	
-	pthread_mutex_unlock(&(mystruct->memMutex));
-	
 	return 0;
 }
