@@ -30,7 +30,7 @@ int main(int argc, char **argv){
 	
 	int memid = atoi(argv[1]);
 
-	long shmid  = shmget(ftok("tt", key), sizeof(ipcstruct),  0666 );	
+	long shmid  = shmget(ftok("tt", key), 1024,  0666 );	
 	printf("Mem id is ->%d<-\n", shmid);
 	char *p = shmat(shmid, NULL, 0);
 	sleep(10);
