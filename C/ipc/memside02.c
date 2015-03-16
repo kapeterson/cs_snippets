@@ -33,21 +33,7 @@ int main(int argc, char **argv){
 	printf("Tring to lock\n");
 	pthread_mutex_lock(&(mystruct->memMutex));
 	printf("We got it\n");
-	
-//		printf("My value is %d\n", mystruct->value);
-//		printf("my value is %d\n", mystruct->thekey);
-//		
-//		while ( mystruct->value == 0 ) {
-//			pthread_cond_wait(&(mystruct->cvCacheGo), &(mystruct->memMutex));
-//
-//		}
-//	mystruct->value = 0;
-//	
-//	printf("Sent the signal\n");
-//	pthread_cond_signal(&(mystruct->cvProxyGo));
-//
-//	pthread_mutex_unlock(&(mystruct->memMutex));
-//
+
 	sleep(5);
 	
 	return 0;

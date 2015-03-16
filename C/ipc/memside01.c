@@ -84,22 +84,6 @@ int main(){
 	sleep(10);
 	
 	pthread_mutex_unlock(&(mystruct->memMutex));
-	
-//	sleep(15);
-//	
-//	while ( 1 ||  mystruct->value == 5 ) {
-//		printf("We waitin\n");
-//		pthread_cond_wait(&(mystruct->cvProxyGo), &(mystruct->memMutex));
-//		printf("Checking again\n");
-//		
-//	}
-//	
-//	printf("WE came out of the wait with value = %d\n", mystruct->value);
-//	sleep(5);
-//	pthread_mutex_unlock(&(mystruct->memMutex));
-//	
-//	shmdt(p);
-//	shmctl(shimid, IPC_RMID, NULL);
 
 
 
