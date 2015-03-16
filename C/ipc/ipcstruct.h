@@ -3,10 +3,12 @@
 
 typedef struct {
 	int value;
-	int size;
 	pthread_mutex_t memMutex;
-	int last;
-} ipcstruct, *ipcstructpointer;
+	pthread_cond_t  cvProxyGo;
+	pthread_cond_t  cvCacheGo;
+	int thekey;
+
+} ipcstruct;
 
 
 #endif

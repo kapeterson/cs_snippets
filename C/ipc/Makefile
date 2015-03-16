@@ -1,7 +1,7 @@
 CC=gcc
 LDFLAGS = -lpthread -lrt
 
-all: sendmsg getmsg sem_client sem_server memside01 memside02 posix01 posix02
+all: sendmsg getmsg sem_client sem_server memside01 memside02 posix01 posix02 chararray
 
 sendmsg: messagequeue01.o
 	$(CC) -o sendmsg messagequeue01.o -I.
@@ -17,9 +17,8 @@ sem_server: sem_server.o
 
 memside01: memside01.o
 	$(CC) -o $@ $(CFLAGS) $(CURL_CFLAGS) $^ $(LDFLAGS) $(CURL_LIBS)
-
 	
-memside01: memside01.o
+memside02: memside02.o
 	$(CC) -o $@ $(CFLAGS) $(CURL_CFLAGS) $^ $(LDFLAGS) $(CURL_LIBS)
 	
 posix01: posix01.o
@@ -27,6 +26,9 @@ posix01: posix01.o
 
 posix02: posix02.o
 	$(CC) -o $@ $(CFLAGS) $(CURL_CFLAGS) $^ $(LDFLAGS) $(CURL_LIBS)
+
+chararray: chararray.o
+	$(CC) -o $@ $(CFLAGS) $(CURL_CFLAGS) $^ $(LDFLAGS) $(CURL_LIBS)
 	
 clean: 
-	rm -fr *.o sendmsg getmsg sem_client sem_server memside01 memside02 posix01 posix02
+	rm -fr *.o sendmsg getmsg sem_client sem_server memside01 memside02 posix01 posix02 chararray

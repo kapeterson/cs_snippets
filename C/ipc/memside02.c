@@ -13,30 +13,42 @@
 
 #include "ipcstruct.h"
 
-long shimid;
-key_t key = 555;
+key_t key = 123;
 
 
 
 
 int main(int argc, char **argv){
 
-	if ( argc < 2 ) {
-		printf("ERROR you need to vit eh mem id\n");
-		return 0;
-	}
+	int shmid  = shmget(ftok(".", key), sizeof(ipcstruct),  0777 );	
+	printf("Mem id is ->%lu<-\n", shmid);
+	char *p = shmat(shmid, (void *)NULL, 0);
 	
-	printf("Arg 1 is %s\n", argv[1]);
 	
-	int memid = atoi(argv[1]);
-
-	long shmid  = shmget(ftok("tt", key), sizeof(ipcstruct),  0666 );	
-	printf("Mem id is ->%d<-\n", shmid);
-	char *p = shmat(shmid, NULL, 0);
-	sleep(10);
-
 	ipcstruct *mystruct = (ipcstruct *)p;
+	
+
+	
+	
+	printf("Tring to lock\n");
 	pthread_mutex_lock(&(mystruct->memMutex));
-	printf("We did it\n");
+	printf("We got it\n");
+	
+//		printf("My value is %d\n", mystruct->value);
+//		printf("my value is %d\n", mystruct->thekey);
+//		
+//		while ( mystruct->value == 0 ) {
+//			pthread_cond_wait(&(mystruct->cvCacheGo), &(mystruct->memMutex));
+//
+//		}
+//	mystruct->value = 0;
+//	
+//	printf("Sent the signal\n");
+//	pthread_cond_signal(&(mystruct->cvProxyGo));
+//
+//	pthread_mutex_unlock(&(mystruct->memMutex));
+//
+	sleep(5);
+	
 	return 0;
 }
