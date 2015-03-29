@@ -55,7 +55,7 @@ int main(){
 	printf("shimid worked %d\n", shimid);
 	p = shmat(shimid, (void *)NULL, 0);
 	ipcstruct *mystruct = (ipcstruct *)p;
-	mystruct->value = 5;
+	mystruct->value = 0;
 	mystruct->thekey = 444;
 	
 	// INITIALIZE THE MUTEX
@@ -78,13 +78,26 @@ int main(){
 	pthread_cond_init(&(mystruct->cvProxyGo), &cond_attr);
 	pthread_cond_init(&(mystruct->cvCacheGo), &cond_attr);
 	
-	
-	pthread_mutex_lock(&(mystruct->memMutex));
-	printf("Sleeping\n");
 	sleep(10);
+	pthread_mutex_init(&(mystruct->memMutex), &mattr);	
+	pthread_cond_init(&(mystruct->cvProxyGo), &cond_attr);
+	pthread_cond_init(&(mystruct->cvCacheGo), &cond_attr);
+	printf("Going to lock and signal\n");
 	
-	pthread_mutex_unlock(&(mystruct->memMutex));
+	
+	while ( 1 ) {
+		pthread_mutex_lock(&(mystruct->memMutex));
 
+		while ( mystruct->value == 1 ) {
+			printf("Waiting\n");
+			pthread_cond_wait(&(mystruct->cvProxyGo), &(mystruct->memMutex));
+			printf("Woke up brah!\n");
+
+		}
+		mystruct->value = 1;
+		pthread_mutex_unlock(&(mystruct->memMutex));
+		pthread_cond_signal(&(mystruct->cvCacheGo));
+	}
 
 
 	
