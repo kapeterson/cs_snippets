@@ -1,9 +1,9 @@
 #include <stdio.h>
-
+#define ARRAY_SIZE 128
 
 int main(){	
-	int vals[10];
-	for ( int i = 0; i < 10; i++)
+	int vals[ARRAY_SIZE];
+	for ( int i = 0; i < ARRAY_SIZE; i++)
 		vals[i] = i;
 
 	printf("OK\n");
@@ -12,7 +12,10 @@ int main(){
 
 
 	int *x = vals;
-	for ( int i = 0; i < 10; i++)
-		printf("Pringing valud %d -> %d\n", i, *(vals + i));	
+	for ( int i = 0; i < ARRAY_SIZE; i++)
+		printf("Pringing valud %d -> 0x%02x\n", i, *(x + i));	
+
+
+	printf("The val is 0x%02x\n",*(x+15));
 	return 0;
 }
