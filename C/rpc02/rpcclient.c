@@ -38,7 +38,9 @@ int main ( int argc, char **argv){
         exit(1);
     }
 
-	printf("Bye\n");
+	int *doublev = squareit_1(5, clnt);
+	
+	printf("Bye double value is %d\n", *doublev);
 	return 0;
 	return 0;
 }

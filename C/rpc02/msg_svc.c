@@ -22,11 +22,18 @@ _printmsg_1 (char * *argp, struct svc_req *rqstp)
 	return (printmsg_1_svc(*argp, rqstp));
 }
 
+static int *
+_squareit_1 (int  *argp, struct svc_req *rqstp)
+{
+	return (squareit_1_svc(*argp, rqstp));
+}
+
 static void
 messageprog_1(struct svc_req *rqstp, register SVCXPRT *transp)
 {
 	union {
 		char *printmsg_1_arg;
+		int squareit_1_arg;
 	} argument;
 	char *result;
 	xdrproc_t _xdr_argument, _xdr_result;
@@ -41,6 +48,12 @@ messageprog_1(struct svc_req *rqstp, register SVCXPRT *transp)
 		_xdr_argument = (xdrproc_t) xdr_wrapstring;
 		_xdr_result = (xdrproc_t) xdr_int;
 		local = (char *(*)(char *, struct svc_req *)) _printmsg_1;
+		break;
+
+	case SQUAREIT:
+		_xdr_argument = (xdrproc_t) xdr_int;
+		_xdr_result = (xdrproc_t) xdr_int;
+		local = (char *(*)(char *, struct svc_req *)) _squareit_1;
 		break;
 
 	default:
