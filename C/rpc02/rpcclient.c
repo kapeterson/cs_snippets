@@ -40,6 +40,12 @@ int main ( int argc, char **argv){
 
 	int *doublev = squareit_1(5, clnt);
 	
+	ldata myval;
+	myval.val =11;
+	myval.size = 22;
+	int *d2 = printdata_1(myval, clnt);
+
+
 	printf("Bye double value is %d\n", *doublev);
 	return 0;
 	return 0;

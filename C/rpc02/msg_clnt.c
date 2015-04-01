@@ -38,3 +38,18 @@ squareit_1(int arg1,  CLIENT *clnt)
 	}
 	return (&clnt_res);
 }
+
+int *
+printdata_1(ldata arg1,  CLIENT *clnt)
+{
+	static int clnt_res;
+
+	memset((char *)&clnt_res, 0, sizeof(clnt_res));
+	if (clnt_call (clnt, PRINTDATA,
+		(xdrproc_t) xdr_ldata, (caddr_t) &arg1,
+		(xdrproc_t) xdr_int, (caddr_t) &clnt_res,
+		TIMEOUT) != RPC_SUCCESS) {
+		return (NULL);
+	}
+	return (&clnt_res);
+}
