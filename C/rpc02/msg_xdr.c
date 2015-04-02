@@ -14,5 +14,7 @@ xdr_ldata (XDR *xdrs, ldata *objp)
 		 return FALSE;
 	 if (!xdr_int (xdrs, &objp->size))
 		 return FALSE;
+	 if (!xdr_bytes (xdrs, (char **)&objp->data.data_val, (u_int *) &objp->data.data_len, ~0))
+		 return FALSE;
 	return TRUE;
 }

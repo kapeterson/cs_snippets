@@ -17,6 +17,10 @@ extern "C" {
 struct ldata {
 	int val;
 	int size;
+	struct {
+		u_int data_len;
+		char *data_val;
+	} data;
 };
 typedef struct ldata ldata;
 

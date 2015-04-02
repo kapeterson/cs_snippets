@@ -43,6 +43,35 @@ int main ( int argc, char **argv){
 	ldata myval;
 	myval.val =11;
 	myval.size = 22;
+	
+	char *tstring = "This is the file data";
+	
+	//myval.data.data_len = strlen(tstring);
+	//myval.data.data_val = tstring;
+	
+	
+	FILE *infile;
+	infile = fopen("inputfile.txt", "r");
+	
+	if ( infile == NULL ) {
+		printf("Unable to open file brah\n");
+		exit(56);
+	}
+	fseek(infile, 0L, SEEK_END);
+	int flen = ftell(infile);
+	printf("Len is %d\n", flen);
+	fseek(infile, 0L, SEEK_SET);
+	myval.data.data_val = (char *)malloc(flen);
+	myval.data.data_len = flen;
+	
+	if ( myval.data.data_val == NULL ) {
+		printf("ERROR mallocing data_val\n");
+		exit(55);
+	}
+	
+	fread(myval.data.data_val, sizeof(char), flen, infile);
+	
+	fclose(infile);
 	int *d2 = printdata_1(myval, clnt);
 
 
