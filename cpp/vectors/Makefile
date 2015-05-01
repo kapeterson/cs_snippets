@@ -1,5 +1,9 @@
 
-all:
+all: vector simplevector
+
+simplevector:
+	g++ -o simplevector simplevector.cpp
+vector:
 	g++ -o vector vector.cpp
 
 object:
@@ -7,4 +11,4 @@ object:
 
 clean:
 	rm -f *.o
-	rm -f vector
+	rm -f vector simplevector
