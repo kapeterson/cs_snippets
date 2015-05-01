@@ -2,7 +2,7 @@
 all: vector simplevector
 
 simplevector:
-	g++ -o simplevector simplevector.cpp
+	g++ -o simplevector simplevector.cpp -std=c++11
 vector:
 	g++ -o vector vector.cpp
 
