@@ -11,15 +11,28 @@
 
 int main(int argc, char *argv[])
 {
+
+
+
     int listenfd = 0, connfd = 0;
     struct sockaddr_in serv_addr; 
 
-    char sendBuff[1025];
-	char recvBuff[128];
+
+   char sendBuff[1025];
+   char recvBuff[128];
 	
     time_t ticks; 
 
     listenfd = socket(AF_INET, SOCK_STREAM, 0);
+
+   int yes = 1;
+    if (setsockopt(listenfd,SOL_SOCKET,SO_REUSEADDR,&yes,sizeof(int)) == -1) { 
+		perror("setsockopt"); 
+		exit(1); 
+	}  
+
+
+
     memset(&serv_addr, '0', sizeof(serv_addr));
     memset(sendBuff, '0', sizeof(sendBuff)); 
 
@@ -39,15 +52,17 @@ int main(int argc, char *argv[])
 		int n = 0;
 		while ( (n = read(connfd, recvBuff, sizeof(recvBuff))) > 0)
 		{
+		
 			recvBuff[n] = 0;
-			printf("%s", recvBuff);
-			char *word;
-			word = strtok(recvBuff, " ");
-			//while ( word != NULL ) {
-				//printf("     Word = %s\n", word);
-				//word = strtok(NULL, " ");
-			//}
+			printf("..%s..", recvBuff);
+			
 		} 
+
+		
+
+	//printf("Closing\n");
+	char *ack = "OK\n";
+	send(connfd, ack, sizeof(ack),0);
         close(connfd);
         sleep(1);
      }
