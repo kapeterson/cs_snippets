@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    serv_addr.sin_port = htons(5000); 
+    serv_addr.sin_port = htons(5001); 
 
     bind(listenfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)); 
 
@@ -54,15 +54,15 @@ int main(int argc, char *argv[])
 		{
 		
 			recvBuff[n] = 0;
-			printf("..%s..", recvBuff);
+			printf("\nRX: %s", recvBuff);
 			
 		} 
 
 		
 
 	//printf("Closing\n");
-	char *ack = "OK\n";
-	send(connfd, ack, sizeof(ack),0);
+	//char *ack = "OK\n";
+	//send(connfd, ack, sizeof(ack),0);
         close(connfd);
         sleep(1);
      }
