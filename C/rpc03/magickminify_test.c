@@ -1,9 +1,14 @@
 #include <stdio.h>
 #include "magickminify.h"
 
-int main(){
-
-	FILE *ifile = fopen("paraglider.jpg","r");
+int main(int argc, char **argv){
+	char *fname = "paraglider.jpg";
+	
+	if ( argc > 1 ) {
+		fname = argv[1];
+	}
+	printf("Using file %s\n", fname);
+	FILE *ifile = fopen(fname,"r");
 	if ( ifile == NULL ) {
 
 	printf("ERROR: Unable to open file\n");
