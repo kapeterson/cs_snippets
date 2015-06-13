@@ -1,0 +1,17 @@
+import turtle
+import time
+
+print "OK"
+
+racer = turtle.Turtle()
+
+for i in range(10):
+	racer.forward(10)
+	time.sleep(.5)
+
+racer.left(90)
+time.sleep(2)
+
+for i in range(10):
+	racer.forward(10)
+	time.sleep(1)
