@@ -16,7 +16,7 @@ for i in range(len(ctext)):
 	cipher += chr(ord(ctext[i]) ^ ord(key[i]))
 
 
-print "Cipher is " + cipher
+print "Cipher is ->" + cipher + "<-"
 
 
 
