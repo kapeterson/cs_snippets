@@ -4,6 +4,7 @@ import time
 print "OK"
 
 racer = turtle.Turtle()
+racer.tracer()
 racer.pencolor("red")
 
 for i in range(10):

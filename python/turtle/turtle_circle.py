@@ -6,6 +6,7 @@ pen = turtle.Turtle()
 
 pen.pencolor("red")
 pen.penup()
+pen.tracer(5,20)
 
 turn = (math.pi/2)/80
 print turn
